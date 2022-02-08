@@ -56,7 +56,7 @@ namespace FSMSADF
     // Size
     typedef uint Size;
 
-#define SIZE_MAX        UINT_MAX
+#define FSMSADF_SIZE_MAX    UINT_MAX
 
     /**
      * Buffer Location

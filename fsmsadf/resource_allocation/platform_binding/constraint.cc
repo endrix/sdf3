@@ -97,9 +97,9 @@ namespace FSMSADF
                                                   "bufferSize");
             BufferSize buf;
 
-            buf[BufferLocation::Mem] = SIZE_MAX;
-            buf[BufferLocation::Src] = SIZE_MAX;
-            buf[BufferLocation::Dst] = SIZE_MAX;
+            buf[BufferLocation::Mem] = FSMSADF_SIZE_MAX;
+            buf[BufferLocation::Src] = FSMSADF_SIZE_MAX;
+            buf[BufferLocation::Dst] = FSMSADF_SIZE_MAX;
 
             if (CHasAttribute(bufferSizeNode, BufferLocation::Src))
                 buf[BufferLocation::Src] = CGetAttribute(bufferSizeNode, BufferLocation::Src);
