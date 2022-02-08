@@ -73,7 +73,6 @@ $(DIRS):
 # Create object files
 $(COMPONENT_BASE)%.$(OBJ): 	%.$(CPP)
 		@echo Creating dependencies for $<
-		@echo -n $(COMPONENT_BASE) > $(DEP_DIR)/$(@:%.$(OBJ)=%.$(DEP))
 		@$(CXX) -MM $(addprefix -I,$(INCLUDES)) $< \
 		>> $(DEP_DIR)/$(@:%.$(OBJ)=%.$(DEP))
 		@echo Compiling $<
