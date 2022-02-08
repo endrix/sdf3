@@ -23,6 +23,12 @@ endif
 # Add includes / libraries for libxml2
 INCLUDES += $(LIBXML2_INC)
 EXT_LIBS_DIRS += $(LIBXML2_LIB)
+
+ifeq ($(PLATFORM),Darwin)
+INCLUDES += $(LIBBOOST_INC)
+EXT_LIBS_DIRS += $(LIBBOOST_LIB)
+endif
+
 EXT_LIBS += $(LIBXML2)
 EXT_LIBS += boost_regex
 
@@ -74,6 +80,13 @@ $(MODULE_LIB_SO): $(MODULE_LIB_A)
 		@echo ""
 		@echo "### Module lib "$(MODULE);
 		@echo Creating shared library1 $(notdir $@);
+
+ifeq ($(PLATFORM),Darwin)
+		@$(CXX) -fpic -shared -Wl,-all_load $^ \
+		$(LDFLAGS) -o $@ \
+		$(addprefix -L,$(USR_LIBS_DIRS)) $(addprefix -l,$(USR_LIBS))\
+		$(addprefix -L,$(EXT_LIBS_DIRS)) $(addprefix -l,$(EXT_LIBS))
+else
 		@$(CXX) -shared $(LDFLAGS) -o $@ \
 		-Wl,-export-all-symbols \
 		-Wl,-enable-auto-import \
@@ -81,5 +94,6 @@ $(MODULE_LIB_SO): $(MODULE_LIB_A)
 		-Wl,-no-whole-archive\
 		$(addprefix -L,$(USR_LIBS_DIRS)) $(addprefix -l,$(USR_LIBS))\
 		$(addprefix -L,$(EXT_LIBS_DIRS)) $(addprefix -l,$(EXT_LIBS))
+endif
 		@echo Adding library $(notdir $@) to distribution;
 		@cp $@ $(subst $(LIB_DIR),$(LIB_DIR_REL), $@);

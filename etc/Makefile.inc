@@ -20,14 +20,6 @@ PROJECT_ROOT   = $(SDF3ROOT)
 COMPONENT_BASE = $(join $(subst /,_, $(subst $(subst //,/, $(join $(PROJECT_ROOT), /)),, $(PWD))), _)
 
 #-------------------------------------------------------------------------------
-# External packages
-#-------------------------------------------------------------------------------
-
-LIBXML2     = xml2
-LIBXML2_INC = /usr/include/libxml2
-LIBXML2_LIB = /usr/include
-
-#-------------------------------------------------------------------------------
 # Variables
 #-------------------------------------------------------------------------------
 
@@ -39,6 +31,22 @@ TARGET      = LINUX
 endif
 ifeq ($(PLATFORM),Cygwin)
 TARGET      = CYGWIN
+endif
+ifeq ($(PLATFORM),Darwin)
+TARGET		= DARWIN
+endif
+
+#-------------------------------------------------------------------------------
+# External packages
+#-------------------------------------------------------------------------------
+
+LIBXML2     = xml2
+LIBXML2_INC = /usr/include/libxml2
+LIBXML2_LIB = /usr/include
+
+ifeq ($(PLATFORM),Darwin)
+LIBBOOST_INC = /opt/homebrew/Cellar/boost/1.76.0/include
+LIBBOOST_LIB = /opt/homebrew/Cellar/boost/1.76.0/lib
 endif
 
 #-------------------------------------------------------------------------------
@@ -71,7 +79,7 @@ AR          = ar
 RANLIB      = ranlib
 MAKE		= make
 
-CXXFLAGS    = -g -fno-tree-fre -O3 -Wall -D_GNU_SOURCE -D_$(TARGET)_ -pipe -fpic
+CXXFLAGS    = -std=c++11 -g -O3 -Wall -D_GNU_SOURCE -D_$(TARGET)_ -pipe -fpic
 LDFLAGS     = 
 ARFLAGS     = cru
 MAKEFLAGS	= --no-print-directory
@@ -81,7 +89,11 @@ CPP         = cc
 DEP         = d
 LIB         = libsdf3-
 LIBA        = a
-LIBSO       = so
+ifeq ($(PLATFORM),Darwin)
+LIBSO		= dylib
+else
+LIBSO		= so
+endif
 
 OBJS        = $(SRCS:%.$(CPP)=$(COMPONENT_BASE)%.$(OBJ))
 DEPS        = $(SRCS:%.$(CPP)=$(COMPONENT_BASE)%.$(DEP))

@@ -458,7 +458,7 @@ namespace SDF
     static
     void Update_Policy()
     {
-        register int i;
+        int i;
 
         for (i = 0; i < nnodes; i++)
         {

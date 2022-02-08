@@ -21,6 +21,13 @@ TARGETS     += $(PROG_REL_LIBS) $(PROG_REL_BINS)
 # Add includes / libraries for libxml2
 INCLUDES += $(LIBXML2_INC)
 EXT_LIBS_DIRS += $(LIBXML2_LIB)
+
+# Add includes / libraries for boost
+ifeq ($(PLATFORM),Darwin)
+INCLUDES += $(LIBBOOST_INC)
+EXT_LIBS_DIRS += $(LIBBOOST_LIB)
+endif
+
 EXT_LIBS += $(LIBXML2)
 EXT_LIBS += boost_regex
 
@@ -93,6 +100,12 @@ $(PROG_SH_LIB):	$(OBJS)
 		@echo Creating shared library $@;
 		@echo use libs dirs: $(USR_LIBS_DIRS);
 		@echo use libs: $(USR_LIBS);
+ifeq ($(PLATFORM),Darwin)
+		@$(CXX) $(LDFLAGS) -fpic -shared -Wl,-all_load $^ \
+		-o $(LIB_DIR)/$@ \
+		$(addprefix -L,$(USR_LIBS_DIRS)) $(addprefix -l,$(USR_LIBS))\
+		$(addprefix -L,$(EXT_LIBS_DIRS)) $(addprefix -l,$(EXT_LIBS))
+else
 		@$(CXX) -shared $(LDFLAGS) -o $(LIB_DIR)/$@ \
 		-Wl,-export-all-symbols \
 		-Wl,-enable-auto-import \
@@ -100,6 +113,7 @@ $(PROG_SH_LIB):	$(OBJS)
 		-Wl,-no-whole-archive\
 		$(addprefix -L,$(USR_LIBS_DIRS)) $(addprefix -l,$(USR_LIBS))\
 		$(addprefix -L,$(EXT_LIBS_DIRS)) $(addprefix -l,$(EXT_LIBS))
+endif
 
 #-------------------------------------------------------------------------------
 # Rules (Add files to release)

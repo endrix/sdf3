@@ -46,7 +46,7 @@ typedef double TDtime;
 #ifdef _MSC_VER
 #define TTIME_MAX ULONG_MAX
 #else
-#define TTIME_MAX       ULONG_LONG_MAX
+#define TTIME_MAX       ULLONG_MAX
 #endif
 
 

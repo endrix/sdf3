@@ -416,7 +416,7 @@ namespace SDF
             iterCnt[i].resize((size_t)(repVec[i] * periodicity));
             for (uint j = 0; j < repVec[i] * periodicity; j++)
             {
-                startTime[i][j] = LONG_LONG_MIN;
+                startTime[i][j] = LLONG_MIN;
                 iterCnt[i][j] = 0;
             }
         }

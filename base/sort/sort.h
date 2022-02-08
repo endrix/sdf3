@@ -37,6 +37,7 @@
 #define BASE_SORT_SORT_H
 
 #include <vector>
+#include <list>
 
 /**
  * lowerCost ()
@@ -81,7 +82,7 @@ bool lowerCost(T x, T y, double *cost, int N, int dimSize)
  * Note that all dimensions must have the same size.
  */
 template <class T>
-void sortOnCost(vector<T> &vec, double *cost, int N = 1, int dimSize = 1)
+void sortOnCost(std::vector<T> &vec, double *cost, int N = 1, int dimSize = 1)
 {
     int i, j;
     T index;
@@ -114,13 +115,11 @@ void sortOnCost(vector<T> &vec, double *cost, int N = 1, int dimSize = 1)
  * Note that all dimensions must have the same size.
  */
 template <class T>
-void sortOnCost(list<T> &vec, double *cost, int N = 1, int dimSize = 1)
+void sortOnCost(std::list<T> &vec, double *cost, int N = 1, int dimSize = 1)
 {
-#ifdef _MSC_VER
-    std::list<T>::iterator i, j, x;
-#else
-    std::_List_iterator<T> i, j, x;
-#endif
+
+    typename std::list<T>::iterator i, j, x;
+
     T index;
 
     // A basic insertion sort algorithm...

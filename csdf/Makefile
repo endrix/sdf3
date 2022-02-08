@@ -16,7 +16,7 @@ include $(SDF3ROOT)/etc/Makefile.inc
 COMPONENTS      = analysis base generate output transform
 
 # Link with libraries
-USR_LIB_EXT  	= $(LIB)sdf.$(LIBSO) $(LIB)base.$(LIBSO)
+USR_LIB_EXT  	= $(LIB)fsmsadf.$(LIBSO) $(LIB)sdf.$(LIBSO) $(LIB)base.$(LIBSO)
 
 MODULE_SH_LIB   = $(LIB)$(MODULE).$(LIBSO)
 TOOLS           = tools

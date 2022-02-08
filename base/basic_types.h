@@ -39,6 +39,7 @@
 
 #include <assert.h>
 #include "float.h"
+#include <limits.h>
 
 /* STL functionality */
 #include <fstream>
@@ -80,9 +81,9 @@ typedef double                  CDouble;
 /* Queue */
 typedef queue<CId>              CQueue;
 
-#ifdef _MSC_VER
+//#ifdef _MSC_VER
 typedef unsigned long           ulong;
-#endif
+//#endif
 
 #define CID_MAX                 UINT_MAX
 
@@ -92,7 +93,7 @@ typedef unsigned long           ulong;
 #define LONG_LONG_MIN           LONG_MIN
 
 #else
-#define CSIZE_MAX               ULONG_LONG_MAX
+#define CSIZE_MAX               ULLONG_MAX
 #endif
 
 /**

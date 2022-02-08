@@ -258,7 +258,7 @@ class CFraction
 
             if (den == 0 || rhs.den == 0)
                 return false;
-            if (num == LONG_LONG_MAX)
+            if (num == LLONG_MAX)
                 return true;
             if ((num * (l / den)) > (rhs.num * (l / rhs.den)))
                 return true;
