@@ -1,3 +1,10 @@
+This is a forked version for SDF3.
+
+Minor changes to the Makefile so that it can compiler under 
+MacOS Monterey.
+
+------------------------------------------------------------------
+
 What is SDF3?
 
 SDF3 is a library and tool to perform all sort of operations on
