@@ -1,6 +1,6 @@
 This is a forked version for SDF3.
 
-Minor changes to the Makefile so that it can compiler under 
+Minor changes to the Makefile so that it can compile under 
 MacOS Monterey.
 
 ------------------------------------------------------------------
